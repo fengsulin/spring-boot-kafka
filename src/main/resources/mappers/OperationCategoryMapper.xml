@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lne.kafka.operator.mapper.OperationCategoryMapper">
+    <resultMap id="categoryResultMap" type="com.lne.kafka.operator.entity.OperationCategory">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+    </resultMap>
+
+    <select id="insertOrUpdate" resultType="java.lang.Integer">
+        insert into operation_category(
+            id,
+            category_name,
+            is_delete
+        ) values (
+          #{id},
+          #{categoryName},
+          #{isDelete}
+         )
+         on duplicate key update is_delete=#{isDelete};
+    </select>
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lne.kafka.operator.mapper.OperationServiceMapper">
+    <resultMap id="serviceResultMap" type="com.lne.kafka.operator.entity.OperationService">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result  column="SERVICE_NAME" jdbcType="VARCHAR" property="serviceName"/>
+        <result  column="SYSTEM_ID" jdbcType="BIGINT" property="systemId"/>
+        <result  column="SERVICE_URL" jdbcType="VARCHAR" property="serviceUrl"/>
+        <result  column="IS_DELETE" jdbcType="INTEGER" property="isDelete"/>
+        <result  column="SERVICE_PORT" jdbcType="VARCHAR" property="servicePort"/>
+        <result  column="IS_NANOTUBES" jdbcType="INTEGER" property="isNanotubes"/>
+
+    </resultMap>
+
+    <select id="insertOrUpdate" resultType="java.lang.Integer">
+        insert into operation_service(
+            ID,
+            SERVICE_NAME,
+            SYSTEM_ID,
+            SERVICE_URL,
+            IS_DELETE,
+            SERVICE_PORT,
+            IS_NANOTUBES
+        )values (
+                    #{id},
+                    #{serviceName},
+                    #{systemId},
+                    #{serviceUrl},
+                    #{isDelete},
+                    #{servicePort},
+                    #{isNanotubes}
+                )
+            on duplicate key update SYSTEM_ID=#{systemId},SERVICE_URL=#{serviceUrl}
+                ,IS_DELETE=#{isDelete},SERVICE_PORT=#{servicePort},IS_NANOTUBES=#{isNanotubes};
+    </select>
+
+</mapper>

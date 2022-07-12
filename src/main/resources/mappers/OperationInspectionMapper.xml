@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lne.kafka.operator.mapper.OperationInspectionMapper">
+    <resultMap id="inspectionResultMap" type="com.lne.kafka.operator.entity.OperationInspection">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result  column="inspection_name" jdbcType="VARCHAR" property="inspectionName"/>
+        <result  column="category_id" jdbcType="BIGINT" property="categoryId"/>
+        <result  column="service_id" jdbcType="BIGINT" property="serviceId"/>
+        <result  column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result  column="inspection_value" jdbcType="VARCHAR" property="inspectionValue"/>
+    </resultMap>
+
+    <select id="insertOrUpdate" resultType="java.lang.Integer">
+        insert into operation_inspection(
+            id,
+            inspection_name,
+            category_id,
+            service_id,
+            inspection_time,
+            inspection_value
+
+        )values (
+                    #{id},
+                    #{inspectionName},
+                    #{categoryId},
+                    #{serviceId},
+                    #{inspectionTime},
+                    #{inspectionValue}
+                )
+            on duplicate key update service_id=#{serviceId},inspection_value=#{inspectionValue};
+    </select>
+
+</mapper>

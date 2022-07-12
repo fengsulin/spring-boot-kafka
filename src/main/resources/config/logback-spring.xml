@@ -2,7 +2,7 @@
 
 <configuration  scan="true" scanPeriod="10 seconds">
     <contextName>logback</contextName>
-    <property name="log.path" value="/var/logs/kafka-study" />
+    <property name="log.path" value="/var/logs/spring-boot-kafka" />
 
     <!--0. 日志格式和颜色渲染 -->
     <!-- 彩色日志依赖的渲染类 -->

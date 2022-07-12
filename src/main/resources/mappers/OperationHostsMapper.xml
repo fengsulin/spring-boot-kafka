@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lne.kafka.operator.mapper.OperationHostsMapper">
+    <resultMap id="hostsResultMap" type="com.lne.kafka.operator.entity.OperationHosts">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result  column="host_ip" jdbcType="VARCHAR" property="hostIp"/>
+        <result  column="host_type" jdbcType="VARCHAR" property="hostType"/>
+        <result  column="resource_id" jdbcType="BIGINT" property="resourceId"/>
+        <result  column="is_nanotubes" jdbcType="INTEGER" property="isNanotubes"/>
+        <result  column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result  column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="insertOrUpdate" resultType="java.lang.Integer">
+        insert into operation_hosts(
+                id,
+                host_ip,
+                host_type,
+                resource_id,
+                is_nanotubes,
+                create_time,
+                update_time
+        )values (
+                 #{id},
+                 #{hostIp},
+                 #{hostType},
+                 #{resourceId},
+                 #{isNanotubes},
+                 #{createTime},
+                 #{updateTime}
+                        )
+                        on duplicate key update host_type=#{hostType},resource_id=#{resourceId},is_nanotubes=#{isNanotubes};
+    </select>
+</mapper>

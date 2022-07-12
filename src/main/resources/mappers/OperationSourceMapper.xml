@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lne.kafka.operator.mapper.OperationSourceMapper">
+    <resultMap id="sourceResultMap" type="com.lne.kafka.operator.entity.OperationSource">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result  column="SOURCE_NAME" jdbcType="VARCHAR" property="sourceName"/>
+        <result  column="IS_DELETE" jdbcType="INTEGER" property="isDelete"/>
+        <result  column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime"/>
+        <result  column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime"/>
+
+    </resultMap>
+
+    <select id="insertOrUpdate" resultType="java.lang.Integer">
+        insert into operation_source(
+            id,
+            source_name,
+            is_delete,
+            create_time,
+            update_time
+        )values (
+                    #{id},
+                    #{sourceName},
+                    #{isDelete},
+                    #{createTime},
+                    #{updateTime}
+                )
+            on duplicate key update is_delete=#{isDelete};
+    </select>
+
+</mapper>
